@@ -17,9 +17,7 @@ class SpringDataMongodbIssuesKotlinApplication(val personRepository: PersonRepos
             Person(id = personId, name = "John Doe", age = 30)
                 .let { personRepository.save(it) }
                 .let { personRepository.findAndIncrementAgeByName(it.name) }
-                .also { println("Modified $it documents") }
-
-            personRepository.findById(personId)
+                .let { personRepository.findById(personId) }
                 ?.let { println(it) }
                 ?: println("Didn't find a person")
         }
